@@ -45,7 +45,7 @@ for distN in range( len(dist_list) ):
     links=distr.links( dist_list[distN],N )
     #пробегаем во всем квартирам в округе
     for link in links:
-        
+        #print(link)        
         #словарь из фич для данной квартиры
         ind_data_dic=get_data_dic.get_data_dic (link)
         #добавляем поле District, которое зависит от района
@@ -53,11 +53,11 @@ for distN in range( len(dist_list) ):
         ind_data_dic['ID']=ID
         ind_data_dic['Link']='http://www.cian.ru/sale/flat/' + str(link) + '/'
         ID+=1
-        #добалвляем словарь фич для квартиры в итоговый датасет    
+        #добавляем словарь фич для квартиры в итоговый датасет    
         X.append(ind_data_dic)
-print("preparing data")
-data=pd.DataFrame(X)
-print ("Local current time :", localtime[3:5])
-localtime = time.localtime(time.time())
-print ("Local current time :", localtime[3:5])
-data.to_csv("data" + str(localtime[3]) + str(localtime[4]) + ".csv")
+    print("preparing data")
+    data=pd.DataFrame(X)
+    print ("Local current time :", localtime[3:5])
+    localtime = time.localtime(time.time())
+    print ("Local current time :", localtime[3:5])
+    data.to_csv("data" + str(localtime[3]) + str(localtime[4]) + ".csv")

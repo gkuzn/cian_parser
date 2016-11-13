@@ -13,7 +13,8 @@ def links(main_link,N):
         #print('page      '+str(page))
         ''' format - хитрый метод, который превратит ссылку на любую страницы в ссылку
         на страницу с номером page'''
-        page_url =  main_link.format(page)
+        page_url =  main_link.format('&p='+str(page))
+        #print(page_url)
         #Ответ от страницы
         search_page = requests.get(page_url)
         search_page = search_page.content
