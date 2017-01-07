@@ -33,7 +33,7 @@ def get_data_dic(link_number):
     #Получаем СЛОВАРЬ из фич
     dic2 = get2.many_get(flat_page)
     #Получаем СЛОВАРЬ из фич
-    dic3 = get3.metro(flat_page)
+    dic3 = get3.many_get3(flat_page)
     
     flatStats={**dic1,**dic2,**dic3}
     #Добавляем фичу "расстояние до нулевого километра в км"
