@@ -12,11 +12,7 @@ import get_data_from_page_PART3 as get3
 import pith
 import requests
 import re
-
 from bs4 import BeautifulSoup
-
-
-
 #Берем на вход страницу
 def get_data_dic(link_number):
     flat_url = 'http://www.cian.ru/sale/flat/' + str(link_number) + '/'

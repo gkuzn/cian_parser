@@ -5,7 +5,7 @@ def links(main_link,N):
     links = []
     from tqdm import tqdm
      #N число страниц при выдаче
-    for page in tqdm(range(1, N+1)):
+    for page in range(1, N+1):
         #print('page      '+str(page))
         ''' format - хитрый метод, который превратит ссылку на любую страницы в ссылку
         на страницу с номером page'''
@@ -20,12 +20,16 @@ def links(main_link,N):
         #print(flat_urls)
         flat_urls_splited = re.split('/', str(flat_urls))
         #print (flat_urls[2])
-        old_link ='0'
+        old_len =len(links)
+        
         for link in flat_urls_splited:
             if (link.isdigit())& (len(link)==9):
-                if link!=old_link:
+                if link not in links:
                     links.append(link)
                     #print(link,end =' ')
-                    old_link =link
+        new_len =len(links)
+        if old_len==new_len:
+            #print('Break')
+            break
     return links
     #return flat_urls_splited
