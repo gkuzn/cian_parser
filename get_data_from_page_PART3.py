@@ -6,11 +6,7 @@ def html_stripper(text):
     return re.sub('<[^<]+?>', '', str(text))
 from bs4 import BeautifulSoup
 
-link_number = 151558515
-flat_url = 'http://www.cian.ru/sale/flat/' + str(link_number) + '/'
-flat_page = requests.get(flat_url)
-flat_page = flat_page.content
-flat_page = BeautifulSoup(flat_page, 'lxml')
+
 
 #Выдаёт не один элемент, а сразу небольшой словарь с переменными
 def metro(flat_page,dic):
@@ -39,7 +35,12 @@ def add_feat4(dic,sth,spliter1,spliter2, key):
         dic[key] = sth_list[1]
     else:
         dic[key] = sth_list[0]
-
+def get_address(flat_page,dic):
+    sth = flat_page.find('h1', attrs={'class':'object_descr_addr'})
+    sth = html_stripper(sth)
+    sth = sth.replace('\n',' ')
+    sth = sth.replace('                       ',' ')
+    dic['Address'] = sth
 def many_get3(flat_page):
     #print(flat_page)
     dic ={}
@@ -52,6 +53,7 @@ def many_get3(flat_page):
     add_feat4(dic=dic ,sth=sth ,spliter1='"is_premium":',spliter2 = '"deal_type":',key= 'is_premium')
     # Добавать ближайшую (первую в списке из ближайших) станций метро, время на способ добраться (пешком или на машине)
     metro(flat_page,dic)
+    get_address(flat_page,dic)
     
     sth = flat_page.find('div', attrs={'class':'object_descr_text'})
     sth = html_stripper(sth)
@@ -59,3 +61,11 @@ def many_get3(flat_page):
     #print()
     dic['Description'] = re.sub(' +',' ',sth)
     return(dic)
+
+#link_number = 151535540
+link_number = 150718150
+flat_url = 'http://www.cian.ru/sale/flat/' + str(link_number) + '/'
+flat_page = requests.get(flat_url)
+flat_page = flat_page.content
+flat_page = BeautifulSoup(flat_page, 'lxml')
+#get_address(flat_page)
