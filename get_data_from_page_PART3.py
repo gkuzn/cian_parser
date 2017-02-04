@@ -7,6 +7,18 @@ def html_stripper(text):
 from bs4 import BeautifulSoup
 
 
+def if_closed(flat_page, dic):
+    sth = flat_page.find('span', attrs={'class':"object_descr_warning object_descr_warning_red"})
+    sth = html_stripper(sth)
+    sth = sth.replace('\n',' ')
+    sth = sth.replace('                       ',' ')
+    dic['if_closed'] = sth
+def get_price_ar(flat_page, dic):
+    sth = flat_page.find('div', attrs={'id':"price_rur"})
+    sth = html_stripper(sth)
+    sth = sth.replace('\n',' ')
+    sth = sth.replace('                       ',' ')
+    dic['price_ar'] = sth
 
 #Выдаёт не один элемент, а сразу небольшой словарь с переменными
 def metro(flat_page,dic):
@@ -54,6 +66,8 @@ def many_get3(flat_page):
     # Добавать ближайшую (первую в списке из ближайших) станций метро, время на способ добраться (пешком или на машине)
     metro(flat_page,dic)
     get_address(flat_page,dic)
+    if_closed(flat_page, dic)
+    get_price_ar(flat_page, dic)
     
     sth = flat_page.find('div', attrs={'class':'object_descr_text'})
     sth = html_stripper(sth)
@@ -63,9 +77,13 @@ def many_get3(flat_page):
     return(dic)
 
 #link_number = 151535540
-link_number = 150718150
-flat_url = 'http://www.cian.ru/sale/flat/' + str(link_number) + '/'
-flat_page = requests.get(flat_url)
-flat_page = flat_page.content
-flat_page = BeautifulSoup(flat_page, 'lxml')
-#get_address(flat_page)
+#link_number = 150718150
+#link_number = 147497564
+#flat_url = 'http://www.cian.ru/sale/flat/' + str(link_number) + '/'
+#flat_page = requests.get(flat_url)
+#flat_page = flat_page.content
+#flat_page = BeautifulSoup(flat_page, 'lxml')
+#dic={}
+
+#print(many_get3(flat_page))
+#print(list(dic))

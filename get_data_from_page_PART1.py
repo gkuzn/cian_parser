@@ -14,7 +14,7 @@ def Price(flat_page):
     price = flat_page.find('div', attrs={'class':'object_descr_price'})
     price = re.split('<div>|руб|\W', str(price))
     price = "".join([i for i in price if i.isdigit()][-3:])
-    return int(price)
+    return (price)
 #Получение координат    
 def Coords(flat_page):
     coords = flat_page.find('div', attrs={'class':'map_info_button_extend'}).contents[1]
