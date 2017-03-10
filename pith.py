@@ -10,8 +10,8 @@ def dist(lat,lon):
     x0=37.621253
     dy=lat-y0
     dx=lon-x0
-    kx=40075.7/360
-    ky=62.394
+    ky=40075.7/360
+    kx=62.394
     dX=dx*kx
     dY=dy*ky
     dist=(dX**2+dY**2)**0.5
